@@ -1,15 +1,30 @@
-import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Form, Input, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { RegisterUser } from "../api/user";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    try {
+      const response = await RegisterUser(values);
+      if (response?.success) {
+        message.success(response?.message);
+        navigate("/login");
+      } else {
+        message.warning(response?.message);
+      }
+    } catch (error) {
+      message.error(error);
+    }
+  };
   return (
-    <header className="App-header">
+    <div className="App-header">
       <main className="main-area mw-500 text-center">
         <section>
           <h1>Register to Cinetix</h1>
         </section>
         <section>
-          <Form layout="vertical">
+          <Form layout="vertical" onFinish={onFinish}>
             <Form.Item
               label="Name"
               htmlFor="name"
@@ -56,6 +71,7 @@ const Register = () => {
                 type="primary"
                 block
                 htmlFor="submit"
+                htmlType="submit"
                 style={{ fontSize: "1rem", fontWeight: "600" }}
               >
                 Register
@@ -69,7 +85,7 @@ const Register = () => {
           </p>
         </section>
       </main>
-    </header>
+    </div>
   );
 };
 
