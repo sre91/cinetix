@@ -5,7 +5,7 @@ const validateJWTTOKEN = (req, res, next) => {
     const token = req?.headers?.authorization?.split("")(1);
 
     const decode = jwt.verify(token, process.env.process.env.SECRET_KEY);
-    req.body = { email: decode?.email, userId: decode?.userId };
+    req.body = { email: decode?.email, userId: decode?.userId, ...req.body };
     next();
   } catch (error) {
     res.status(401);
