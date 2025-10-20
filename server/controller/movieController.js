@@ -44,7 +44,8 @@ const updateMovie = async (req, res, next) => {
 };
 const deleteMovie = async (req, res, next) => {
   try {
-    const movie = await movieModel.findByIdAndDelete(req?.body?.movieId);
+    const movieId = req.params.movieId;
+    await movieModel.findByIdAndDelete(movieId);
     res.send({
       success: true,
       message: "The movie has benn deleted",
