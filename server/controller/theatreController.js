@@ -42,7 +42,23 @@ const deleteTheatre = async (req, res, next) => {
 };
 const getAllTheatres = async (req, res, next) => {
   try {
+    //remove password from owener object
     const allTheatres = await Theatre.find().populate("owner");
+
+    res.send({
+      success: true,
+      message: "All the theatres fetched",
+      data: allTheatres,
+    });
+  } catch (err) {
+    res.status(400);
+    next(err);
+  }
+};
+
+const getAllTheatresByOwner = async (req, res, next) => {
+  try {
+    const allTheatres = await Theatre.find({ owner: req.body.userId });
     res.send({
       success: true,
       message: "All the theatres fetched",
@@ -59,4 +75,5 @@ module.exports = {
   updateTheatre,
   deleteTheatre,
   getAllTheatres,
+  getAllTheatresByOwner,
 };

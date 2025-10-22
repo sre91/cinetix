@@ -6,6 +6,8 @@ import { Provider, useSelector } from "react-redux";
 import Admin from "./pages/Admin";
 import Partner from "./pages/Partner";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SingleMovie from "./pages/SingleMovie";
+import BookShow from "./pages/BookShow";
 
 function App() {
   const { loading } = useSelector((state) => {
@@ -53,6 +55,25 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+            path="/movie/:id"
+            element={
+              <ProtectedRoute>
+                <SingleMovie />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/book-show/:id"
+            element={
+              <ProtectedRoute>
+                <BookShow />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/login"
             element={

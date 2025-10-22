@@ -118,7 +118,7 @@ const ProtectedRoute = ({ children }) => {
           </h3>
           <Menu them="dark" mode="horizontal" items={navItems} />
         </Header>
-        <Content style={{ maxHeight: "100%" }}>{children}</Content>
+        <Content style={{ height: "100%" }}>{children}</Content>
         <Footer
           style={{
             textAlign: "center",
